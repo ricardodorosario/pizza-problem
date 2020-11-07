@@ -71,11 +71,47 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0px 20px 0px 20px;
 }
 
 .vote-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.ranking {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px 20px 10px;
+}
+.ranking > h2 {
+  text-decoration: underline;
+}
+.ranking > ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0px 20px 0px 20px !important;
+}
+.ranking > ul > li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+.ranking > ul > li > .likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }

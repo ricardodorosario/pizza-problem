@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AppHeader from "../components/AppHeader";
-import AppFooter from "../components/AppFooter";
-import MainPage from "../mainPage/MainPage";
-import VotePage from "../votePage/VotePage";
+import AppHeader from "./components/AppHeader";
+import AppFooter from "./components/AppFooter";
+import MainPage from "./mainPage/MainPage";
+import VotePage from "./votePage/VotePage";
 
 class App extends Component {
   constructor(props) {
