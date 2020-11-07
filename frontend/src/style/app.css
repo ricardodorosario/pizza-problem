@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header {
+  background-color: #f43a3a;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(20px + 2vmin);
+  font-family: "sans-serif";
+  color: white;
+  width: 100%;
+}
+
+.App-logo {
+  height: 80px;
+  margin: 0px 20px 0px 20px;
+}
+
+.App-footer {
+  background-color: #f43a3a;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  font-family: "sans-serif";
+  color: white;
+  width: 100%;
+}
+
+.login {
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: black -3px 3px 10px 1px;
+}
+.login > div {
+  margin: 10px 0px 10px 0px;
+}
+.login > button {
+  margin: 5px 0px 5px 0px;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: row;
+}
