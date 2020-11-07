@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import * as appActions from "./AppActions";
+import { connect } from "react-redux";
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
 import MainPage from "../mainPage/MainPage";
+import VotePage from "../votePage/VotePage";
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +15,18 @@ class App extends Component {
     return (
       <div className='App'>
         <AppHeader />
-        <MainPage />
+        {this.props.loggedIn ? <VotePage /> : <MainPage />}
         <AppFooter />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { loggedIn: state.loggedIn };
+};
+const mapDispatchToProps = null;
+
+App.proptypes = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

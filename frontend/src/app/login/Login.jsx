@@ -1,28 +1,65 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
+import SignUp from "../signUp/SignUp";
+import { useDispatch } from "react-redux";
+/**
+ * Login jsx function
+ */
+export default function Login() {
+  const dispatch = useDispatch();
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginValid, setLoginValid] = useState(undefined);
 
-import * as loginActions from "./LoginActions";
-
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  function validate() {
+    if (username === "" || password === "") {
+      setLoginValid(false);
+      return false;
+    }
+    setLoginValid(true);
+    return true;
   }
 
-  render() {
-    return (
-      <div className='login'>
-        <Input placeholder='Username' />
-        <Input placeholder='Password' />
-        <Button variant='contained' color='primary'>
-          Log In
-        </Button>
-        <Button variant='contained' color='default'>
-          Sign Up
-        </Button>
-      </div>
-    );
+  function login() {
+    //try to login into backend
+    dispatch({ type: "LOGGED_IN", payload: true });
   }
+
+  return (
+    <div className='login'>
+      <Input
+        id='username'
+        placeholder='Username'
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <Input
+        id='password'
+        placeholder='Password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={() => {
+          if (validate()) {
+            login();
+          }
+        }}>
+        Log In
+      </Button>
+      <Button
+        variant='contained'
+        color='default'
+        onClick={() => setShowSignUp(true)}>
+        Sign Up
+      </Button>
+      {showSignUp && <SignUp setShowSignUp={setShowSignUp} />}
+      {loginValid === false && (
+        <div>You must enter your username and password.</div>
+      )}
+    </div>
+  );
 }
-
-export default Login;

@@ -1,12 +1,12 @@
 const initialState = {
-  inputFilter: "",
+  loggedIn: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "INPUT_FILTER_SAVED":
-      return { ...state, inputFilter: action.payload };
- 
+    case "LOGGED_IN":
+      return { ...state, loggedIn: action.payload };
+
     default:
       return state;
   }
