@@ -1,92 +1,44 @@
 import React, { Component } from "react";
 import "./ranking.css";
+import axios from "axios";
+import { connect } from "react-redux";
 import ReactApexCharts from "react-apexcharts";
 import WhitePanel from "../components/WhitePanel";
+const setRankingChart = (payload) => ({ type: "SET_RANKING_CHART", payload });
 
 /**
- * Ranking jsx function
+ * Ranking jsx class
  */
-export default class Ranking extends Component {
+class Ranking extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      rankingChart: null,
-    };
+    this.state = {};
+  }
+
+  fetch() {
+    axios
+      .get("http://localhost:3001/chart/")
+      .then((success) => {
+        // handle success
+        this.props.setRankingChart(success.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
   }
 
   componentDidMount() {
-    const chart = {
-      series: [
-        {
-          data: [-10, 44, 55, 57, 56, 61, 58, 63, 60, 66],
-        },
-      ],
-      options: {
-        chart: {
-          type: "bar",
-          height: 350,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: "55%",
-            endingShape: "rounded",
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ["transparent"],
-        },
-        xaxis: {
-          categories: [
-            "John",
-            "Mary",
-            "Gary",
-            "Lucas",
-            "Ann",
-            "Maria",
-            "Suzie",
-            "Mario",
-            "Carlos",
-          ],
-        },
-        yaxis: {
-          title: {
-            text: "Likes",
-          },
-        },
-        fill: {
-          opacity: 1,
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return val + " likes";
-            },
-          },
-        },
-      },
-    };
-
-    if (!this.state.rankingChart) {
-      this.setState((state) => ({
-        ...state,
-        rankingChart: chart,
-      }));
-    }
+    this.fetch();
   }
 
   render() {
     return (
       <WhitePanel title={"Lover's Ranking"}>
-        {this.state.rankingChart && (
+        {this.props.rankingChart && (
           <ReactApexCharts
-            options={this.state.rankingChart.options}
-            series={this.state.rankingChart.series}
+            options={this.props.rankingChart.options}
+            series={this.props.rankingChart.series}
             type='bar'
             height={350}
           />
@@ -95,3 +47,13 @@ export default class Ranking extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return { rankingChart: state.rankingChart };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setRankingChart: (rankingChart) => dispatch(setRankingChart(rankingChart)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Ranking);

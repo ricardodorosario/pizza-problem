@@ -4,6 +4,7 @@ import BlackBackgroundPanel from "../components/BlackBackgroundPanel";
 import WhitePanel from "../components/WhitePanel";
 import { useDispatch } from "react-redux";
 import Alert from "../components/Alert";
+import axios from "axios";
 
 export default function SignUp(props) {
   const dispatch = useDispatch();
@@ -22,7 +23,18 @@ export default function SignUp(props) {
   }
 
   function signup() {
-    //try to login into backend
+    axios
+      .post("http://localhost:3001/signup/", { email, username, password })
+      .then((success) => {
+        // handle success
+        if (success.data.valid) {
+          props.setMessage(success.data.message);
+        }
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
     props.setShowSignUp(false);
   }
 
@@ -45,6 +57,7 @@ export default function SignUp(props) {
           placeholder='Password'
           id='password'
           value={password}
+          type='password'
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button

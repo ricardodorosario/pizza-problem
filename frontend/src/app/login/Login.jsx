@@ -4,6 +4,7 @@ import SignUp from "../signUp/SignUp";
 import { useDispatch } from "react-redux";
 import WhitePanel from "../components/WhitePanel";
 import Alert from "../components/Alert";
+import axios from "axios";
 /**
  * Login jsx function
  */
@@ -12,20 +13,37 @@ export default function Login() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginValid, setLoginValid] = useState(undefined);
+  const [message, setMessage] = useState("");
 
   function validate() {
     if (username === "" || password === "") {
-      setLoginValid(false);
+      setMessage("You must enter your username and password.");
       return false;
     }
-    setLoginValid(true);
+    setMessage("");
     return true;
   }
 
   function login() {
-    //try to login into backend
-    dispatch({ type: "LOGGED_IN", payload: true });
+    axios
+      .post("http://localhost:3001/login/", { username, password })
+      .then((success) => {
+        // handle success
+        if (success.data.valid) {
+          console.log(success.data);
+          dispatch({ type: "LOGGED_IN", payload: true });
+          dispatch({
+            type: "USER_LOGGED",
+            payload: { username, votes: success.data.votes },
+          });
+        } else {
+          setMessage(success.data.message);
+        }
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
   }
 
   return (
@@ -40,6 +58,7 @@ export default function Login() {
         id='password'
         placeholder='Password'
         value={password}
+        type='password'
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
@@ -58,11 +77,13 @@ export default function Login() {
         onClick={() => setShowSignUp(true)}>
         Sign Up
       </Button>
-      {showSignUp && <SignUp setShowSignUp={setShowSignUp} />}
+      {showSignUp && (
+        <SignUp setShowSignUp={setShowSignUp} setMessage={setMessage} />
+      )}
       <Alert
-        open={loginValid === false}
-        handleClose={() => setLoginValid(undefined)}
-        message='You must enter your username and password.'
+        open={message !== ""}
+        handleClose={() => setMessage("")}
+        message={message}
       />
     </WhitePanel>
   );

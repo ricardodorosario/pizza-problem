@@ -1,35 +1,72 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./votePage.css";
 import pizza from "../../images/pizza-2.png";
 import { Button } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import axios from "axios";
 
 export default function VotePage() {
   const dispatch = useDispatch();
-  const [likedTimes, setLikedTimes] = useState(0);
+  const userLogged = useSelector((state) => state.userLogged);
+  const votes = useSelector((state) => state.votes);
 
   function logout() {
-    //try to login into backend
-    dispatch({ type: "LOGGED_IN", payload: false });
+    axios
+      .post("http://localhost:3001/logout/")
+      .then((success) => {
+        // handle success
+        if (success.data.valid) {
+          dispatch({ type: "LOGGED_IN", payload: false });
+          dispatch({ type: "USER_LOGGED", payload: "" });
+          dispatch({
+            type: "SET_RANKING_CHART",
+            payload: success.data.rankingChart,
+          });
+        }
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
   }
 
   function liked() {
-    //try to send liked into backend
-    setLikedTimes(likedTimes + 1);
+    axios
+      .post("http://localhost:3001/vote/", {
+        username: userLogged,
+        votes: votes + 1,
+      })
+      .then((success) => {
+        dispatch({ type: "VOTED", payload: success.data });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
     console.log("Liked");
   }
   function unliked() {
-    //try to send liked into backend
-    setLikedTimes(likedTimes - 1);
+    axios
+      .post("http://localhost:3001/vote/", {
+        username: userLogged,
+        votes: votes - 1,
+      })
+      .then((success) => {
+        dispatch({ type: "VOTED", payload: success.data });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
     console.log("Unliked");
   }
 
   return (
     <div className='vote-page'>
       <h2>
-        You liked it {likedTimes} times! {likedTimes > 0 ? ":D" : ":("}
+        Hi {userLogged}! You liked it {votes} times! {votes > 0 ? ":D" : ":("}
       </h2>
       <h1>Do you like pizza?</h1>
       <div className='choices'>
