@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
 import SignUp from "../signUp/SignUp";
 import { useDispatch } from "react-redux";
+import WhitePanel from "../components/WhitePanel";
+import Alert from "../components/Alert";
 /**
  * Login jsx function
  */
@@ -27,7 +29,7 @@ export default function Login() {
   }
 
   return (
-    <div className='login'>
+    <WhitePanel title='Log in to vote'>
       <Input
         id='username'
         placeholder='Username'
@@ -57,9 +59,11 @@ export default function Login() {
         Sign Up
       </Button>
       {showSignUp && <SignUp setShowSignUp={setShowSignUp} />}
-      {loginValid === false && (
-        <div>You must enter your username and password.</div>
-      )}
-    </div>
+      <Alert
+        open={loginValid === false}
+        handleClose={() => setLoginValid(undefined)}
+        message='You must enter your username and password.'
+      />
+    </WhitePanel>
   );
 }

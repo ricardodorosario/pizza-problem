@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ranking.css";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 /**
@@ -26,7 +27,7 @@ export default function Ranking() {
             <li key={user.username}>
               <div>{user.username}:</div>
               <div className='likes'>
-                <div>{user.likes}</div> <FavoriteIcon />
+                <div>{user.likes}</div> <FavoriteIcon color='secondary' />
               </div>
             </li>
           );
@@ -37,7 +38,7 @@ export default function Ranking() {
 
   return (
     <div className='ranking'>
-      <h2>Ranking of likes</h2>
+      <h2>Lover's Ranking</h2>
       <ul>{rankingList}</ul>
     </div>
   );

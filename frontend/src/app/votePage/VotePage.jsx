@@ -1,8 +1,10 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import "./votePage.css";
+import pizza from "../../images/pizza-2.png";
 import { Button } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
 export default function VotePage() {
   const dispatch = useDispatch();
@@ -27,17 +29,26 @@ export default function VotePage() {
   return (
     <div className='vote-page'>
       <h2>
-        You liked it {likedTimes} times {likedTimes > 0 ? ":D" : ":("}!
+        You liked it {likedTimes} times! {likedTimes > 0 ? ":D" : ":("}
       </h2>
-      <h1>Chose your preference</h1>
+      <h1>Do you like pizza?</h1>
       <div className='choices'>
-        <Button variant='contained' color='default' onClick={liked}>
+        <Button
+          title='Like'
+          variant='contained'
+          color='default'
+          onClick={liked}>
           <FavoriteIcon color='secondary' fontSize='large' />
         </Button>
-        <Button variant='contained' color='default' onClick={unliked}>
+        <Button
+          title='Unlike'
+          variant='contained'
+          color='default'
+          onClick={unliked}>
           <ThumbDownIcon fontSize='large' />
         </Button>
       </div>
+      <img src={pizza} />
       <Button variant='contained' color='primary' onClick={logout}>
         Back
       </Button>

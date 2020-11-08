@@ -1,0 +1,18 @@
+.white-panel {
+  min-width: 300px;
+  padding: 20px 40px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: black -3px 3px 10px 1px;
+  background-color: beige;
+}
+.white-panel > div {
+  margin: 10px 0px 10px 0px;
+}
+.white-panel > h2 {
+  text-align: center;
+}
+.white-panel > button {
+  margin: 5px 0px 5px 0px;
+}

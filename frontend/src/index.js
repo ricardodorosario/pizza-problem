@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./style/app.css";
 import Routes from "./config/routes";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";

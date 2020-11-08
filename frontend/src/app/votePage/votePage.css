@@ -1,0 +1,18 @@
+.vote-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.vote-page > button {
+  margin: 20px;
+}
+.vote-page > img {
+  max-height: 600px;
+}
+.choices {
+  margin-bottom: 20px;
+}
+.choices > button {
+  margin: 0px 10px 0px 10px;
+}

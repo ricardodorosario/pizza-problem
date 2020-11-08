@@ -1,13 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-class AppFooter extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return <footer className='App-footer'></footer>;
-  }
+export default function AppFooter() {
+  return <footer className='App-footer'></footer>;
 }
-
-export default AppFooter;

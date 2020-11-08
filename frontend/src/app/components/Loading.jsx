@@ -1,19 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import BlackBackgroundPanel from "./BlackBackgroundPanel";
 import loading from "./style/loading.gif";
 
-/**
- * Creates a list of panels to show into the app
- */
-class Loading extends Component {
-  render() {
-    return (
-      <div data-testid='loading' className='loading'>
-        <img src={loading} alt='Loading...' />
-      </div>
-    );
-  }
+export default function Loading() {
+  return (
+    <BlackBackgroundPanel>
+      <img src={loading} alt='Loading...' />
+    </BlackBackgroundPanel>
+  );
 }
-
-Loading.proptypes = {};
-
-export default Loading;

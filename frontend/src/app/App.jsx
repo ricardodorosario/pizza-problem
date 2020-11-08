@@ -1,32 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
+import "./app.css";
 import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
 import MainPage from "./mainPage/MainPage";
 import VotePage from "./votePage/VotePage";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <div className='App'>
-        <AppHeader />
-        {this.props.loggedIn ? <VotePage /> : <MainPage />}
-        <AppFooter />
-      </div>
-    );
-  }
+export default function App() {
+  const loggedIn = useSelector((state) => state.loggedIn);
+  return (
+    <div className='App'>
+      <AppHeader />
+      {loggedIn ? <VotePage /> : <MainPage />}
+      <AppFooter />
+    </div>
+  );
 }
-
-const mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn };
-};
-const mapDispatchToProps = null;
-
-App.proptypes = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
