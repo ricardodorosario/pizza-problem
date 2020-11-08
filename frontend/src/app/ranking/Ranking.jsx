@@ -1,45 +1,97 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import "./ranking.css";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import ReactApexCharts from "react-apexcharts";
+import WhitePanel from "../components/WhitePanel";
 
 /**
  * Ranking jsx function
  */
-export default function Ranking() {
-  const [rankingList, setRankingList] = useState([]);
-  useEffect(() => {
-    const list = [
-      { username: "Mary", likes: 1235 },
-      { username: "John", likes: 50 },
-      { username: "Gary", likes: 18 },
-      { username: "Lary", likes: 15 },
-      { username: "Mario", likes: 10 },
-      { username: "Anna", likes: 5 },
-      { username: "Bill", likes: 3 },
-      { username: "Joe", likes: 1 },
-      { username: "Donald", likes: -2 },
-      { username: "Larry", likes: -10 },
-    ];
-    if (rankingList.length === 0) {
-      setRankingList(
-        list.map((user) => {
-          return (
-            <li key={user.username}>
-              <div>{user.username}:</div>
-              <div className='likes'>
-                <div>{user.likes}</div> <FavoriteIcon color='secondary' />
-              </div>
-            </li>
-          );
-        })
-      );
-    }
-  });
+export default class Ranking extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rankingChart: null,
+    };
+  }
 
-  return (
-    <div className='ranking'>
-      <h2>Lover's Ranking</h2>
-      <ul>{rankingList}</ul>
-    </div>
-  );
+  componentDidMount() {
+    const chart = {
+      series: [
+        {
+          data: [-10, 44, 55, 57, 56, 61, 58, 63, 60, 66],
+        },
+      ],
+      options: {
+        chart: {
+          type: "bar",
+          height: 350,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "55%",
+            endingShape: "rounded",
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        xaxis: {
+          categories: [
+            "John",
+            "Mary",
+            "Gary",
+            "Lucas",
+            "Ann",
+            "Maria",
+            "Suzie",
+            "Mario",
+            "Carlos",
+          ],
+        },
+        yaxis: {
+          title: {
+            text: "Likes",
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " likes";
+            },
+          },
+        },
+      },
+    };
+
+    if (!this.state.rankingChart) {
+      this.setState((state) => ({
+        ...state,
+        rankingChart: chart,
+      }));
+    }
+  }
+
+  render() {
+    return (
+      <WhitePanel title={"Lover's Ranking"}>
+        {this.state.rankingChart && (
+          <ReactApexCharts
+            options={this.state.rankingChart.options}
+            series={this.state.rankingChart.series}
+            type='bar'
+            height={350}
+          />
+        )}
+      </WhitePanel>
+    );
+  }
 }
