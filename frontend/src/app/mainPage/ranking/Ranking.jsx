@@ -3,23 +3,18 @@ import "./ranking.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import ReactApexCharts from "react-apexcharts";
-import WhitePanel from "../components/WhitePanel";
+import WhitePanel from "../../components/WhitePanel";
 const setRankingChart = (payload) => ({ type: "SET_RANKING_CHART", payload });
 
 /**
- * Ranking jsx class
+ * Ranking class. Must be in class because ApexCharts component.
+ *
  */
 class Ranking extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   fetch() {
     axios
       .get("http://localhost:3001/chart/")
       .then((success) => {
-        // handle success
         this.props.setRankingChart(success.data);
       })
       .catch((error) => {
@@ -34,7 +29,7 @@ class Ranking extends Component {
 
   render() {
     return (
-      <WhitePanel title={"Lover's Ranking"}>
+      <WhitePanel title={"Lover's Ranking"} class='ranking'>
         {this.props.rankingChart && (
           <ReactApexCharts
             options={this.props.rankingChart.options}
@@ -47,6 +42,8 @@ class Ranking extends Component {
     );
   }
 }
+
+//redux connection
 const mapStateToProps = (state) => {
   return { rankingChart: state.rankingChart };
 };

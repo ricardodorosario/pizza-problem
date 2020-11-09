@@ -11,10 +11,12 @@ var votes = [
   { Username: "Donald", Votes: -15 },
 ];
 
+//Gets the list of votes
 function getVotes() {
   return votes;
 }
 
+//Return the number of votes of an username
 function getVotesPerUsername(username) {
   var user = votes.filter((usr) => usr.Username === username);
   if (user.length > 0) {
@@ -23,6 +25,7 @@ function getVotesPerUsername(username) {
   return 0;
 }
 
+//Set votes into an username
 function setVotes(username, vts) {
   var newVotes = votes.map((usr) => {
     if (usr.Username === username) {
@@ -33,8 +36,9 @@ function setVotes(username, vts) {
   Object.assign(votes, newVotes);
 }
 
+//Add a new voter
 function addVoter(username) {
-  Object.assign(votes, [{ Username: username, Votes: 0 }]);
+  votes.push({ Username: username, Votes: 0 });
 }
 
 module.exports = { getVotes, setVotes, getVotesPerUsername, addVoter };

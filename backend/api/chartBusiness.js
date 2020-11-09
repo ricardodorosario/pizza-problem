@@ -1,9 +1,11 @@
 var { getVotes } = require("./votesBusiness");
 
+//Returns the chart of the voters
 function getChart() {
   var votes = getVotes()
     .sort((usrA, usrB) => usrB.Votes - usrA.Votes)
     .slice(0, 10);
+
   return {
     series: [
       {

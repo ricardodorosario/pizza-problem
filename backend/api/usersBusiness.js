@@ -13,22 +13,24 @@ var users = [
   { Username: "Donald", Password: "Donald" },
 ];
 
+//Gets the list of users
 function getUsers() {
   return users;
 }
 
+//Adds a new user and put him into the voters list
 function addUser(username, password) {
-  Object.assign(users, [{ Username: username, Password: password }]);
+  users.push({ Username: username, Password: password });
   addVoter(username);
 }
 
+//Checks if the credentials of the user is alright
 function checkUser(username, password) {
   var hasUserValid = users.filter(
     (usr) =>
       usr.Username.localeCompare(username) === 0 &&
       usr.Password.localeCompare(password) === 0
   );
-  console.log(hasUserValid, users, username, password);
   if (hasUserValid.length > 0) {
     return true;
   }

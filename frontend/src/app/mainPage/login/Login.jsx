@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
-import SignUp from "../signUp/SignUp";
+import SignUp from "../../signUp/SignUp";
 import { useDispatch } from "react-redux";
-import WhitePanel from "../components/WhitePanel";
-import Alert from "../components/Alert";
+import WhitePanel from "../../components/WhitePanel";
+import Alert from "../../components/Alert";
 import axios from "axios";
 /**
- * Login jsx function
+ * Login component
  */
 export default function Login() {
   const dispatch = useDispatch();
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false); //Shows Signiup Modal
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -28,9 +28,7 @@ export default function Login() {
     axios
       .post("http://localhost:3001/login/", { username, password })
       .then((success) => {
-        // handle success
         if (success.data.valid) {
-          console.log(success.data);
           dispatch({ type: "LOGGED_IN", payload: true });
           dispatch({
             type: "USER_LOGGED",
@@ -47,7 +45,7 @@ export default function Login() {
   }
 
   return (
-    <WhitePanel title='Log in to vote'>
+    <WhitePanel title='Log in to vote' class='login'>
       <Input
         id='username'
         placeholder='Username'

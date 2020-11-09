@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
+/**
+ * React component to show an alert message
+ * @param {*} props
+ */
 export default function Alert(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(props.open, open);
     if (props.open !== open) {
       setOpen(props.open);
     }
@@ -40,3 +44,14 @@ export default function Alert(props) {
     />
   );
 }
+
+Alert.proptypes = {
+  message: PropTypes.string,
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+};
+Alert.defaultProps = {
+  message: "",
+  open: false,
+  handleClose: () => {},
+};

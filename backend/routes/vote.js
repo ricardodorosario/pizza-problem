@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { setVotes, getVotesPerUsername } = require("../app/votesBusiness");
+var { setVotes, getVotesPerUsername } = require("../api/votesBusiness");
 
 /* POST vote. */
 router.post("/", function (req, res, next) {

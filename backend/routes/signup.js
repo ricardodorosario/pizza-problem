@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { addUser } = require("../app/usersBusiness");
+var { addUser } = require("../api/usersBusiness");
 
 /* POST signup listing. */
 router.post("/", function (req, res, next) {

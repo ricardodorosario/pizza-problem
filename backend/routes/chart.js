@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var getChart = require("../app/chartBusiness");
+var getChart = require("../api/chartBusiness");
 
 router.get("/", function (req, res, next) {
   res.setHeader("Content-Type", "application/json");

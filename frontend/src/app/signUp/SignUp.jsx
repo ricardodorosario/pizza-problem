@@ -2,23 +2,27 @@ import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
 import BlackBackgroundPanel from "../components/BlackBackgroundPanel";
 import WhitePanel from "../components/WhitePanel";
-import { useDispatch } from "react-redux";
 import Alert from "../components/Alert";
+import PropTypes from "prop-types";
 import axios from "axios";
+import "./signup.css";
 
+/**
+ * Sign up form component
+ * @param {*} props
+ */
 export default function SignUp(props) {
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [signupValid, setSignupValid] = useState(undefined);
+  const [message, setMessage] = useState("");
 
   function validate() {
     if (username === "" || password === "" || email === "") {
-      setSignupValid(false);
+      setMessage("You must enter your email, username and password.");
       return false;
     }
-    setSignupValid(true);
+    setMessage("");
     return true;
   }
 
@@ -26,7 +30,6 @@ export default function SignUp(props) {
     axios
       .post("http://localhost:3001/signup/", { email, username, password })
       .then((success) => {
-        // handle success
         if (success.data.valid) {
           props.setMessage(success.data.message);
         }
@@ -40,7 +43,9 @@ export default function SignUp(props) {
 
   return (
     <BlackBackgroundPanel>
-      <WhitePanel title='Sign up to show how much you love pizza!'>
+      <WhitePanel
+        title='Sign up to show how much you love pizza!'
+        class='signup'>
         <Input
           placeholder='Email'
           id='email'
@@ -77,11 +82,20 @@ export default function SignUp(props) {
           Back
         </Button>
         <Alert
-          open={signupValid === false}
-          handleClose={() => setSignupValid(undefined)}
-          message='You must enter your email, username and password.'
+          open={message != ""}
+          handleClose={() => setMessage("")}
+          message={message}
         />
       </WhitePanel>
     </BlackBackgroundPanel>
   );
 }
+
+SignUp.proptypes = {
+  setMessage: PropTypes.func,
+  setShowSignUp: PropTypes.func,
+};
+SignUp.defaultProps = {
+  setMessage: () => {},
+  setShowSignUp: () => {},
+};

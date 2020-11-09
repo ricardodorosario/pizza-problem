@@ -1,9 +1,12 @@
 import React from "react";
 import "./mainPage.css";
 import pizza from "../../images/pizza.png";
-import Login from "../login/Login";
-import Ranking from "../ranking/Ranking";
+import Login from "./login/Login";
+import Ranking from "./ranking/Ranking";
 
+/**
+ * Main page's component. Shows login panel and ranking
+ */
 export default function MainPage() {
   return (
     <div className='main-page'>
