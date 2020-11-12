@@ -60,6 +60,7 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
+        className='login-button'
         variant='contained'
         color='primary'
         onClick={() => {
@@ -70,6 +71,7 @@ export default function Login() {
         Log In
       </Button>
       <Button
+        className='signup-button'
         variant='contained'
         color='default'
         onClick={() => setShowSignUp(true)}>

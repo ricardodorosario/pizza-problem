@@ -38,10 +38,16 @@ export default function LikeOptions() {
 
   return (
     <div className='choices'>
-      <Button title='Like' variant='contained' color='default' onClick={like}>
+      <Button
+        className='like-button'
+        title='Like'
+        variant='contained'
+        color='default'
+        onClick={like}>
         <FavoriteIcon color='secondary' fontSize='large' />
       </Button>
       <Button
+        className='unlike-button'
         title='Unlike'
         variant='contained'
         color='default'

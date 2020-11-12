@@ -20,3 +20,8 @@ test("Should return false checking an user with wrong password", () => {
   const expected = [{ Username: "Ricardo", Password: "Ricardo" }];
   expect(checkUser("Ricardo", "1234")).toBeFalsy();
 });
+
+test("Should return FALSE after adding it", () => {
+  const res = addUser("Mario", "M");
+  expect(res.valid).toBeFalsy();
+});

@@ -19,7 +19,7 @@ export default function Alert(props) {
 
   function handleClose() {
     props.handleClose();
-    () => setOpen(false);
+    setOpen(false);
   }
 
   return (

@@ -1,0 +1,52 @@
+{
+  "javascript.suggest.completeFunctionCalls": true,
+  "emmet.syntaxProfiles": {
+    "javascript": ["js", "jsx"]
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "files.associations": {
+    "*.js": "javascriptreact",
+    "*.jsx": "javascriptreact"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.insertSpaces": true,
+  "prettier.semi": true,
+  "prettier.tabWidth": 2,
+  "prettier.htmlWhitespaceSensitivity": "strict",
+  "prettier.jsxBracketSameLine": true,
+  "prettier.bracketSpacing": true,
+  "eslint.format.enable": false,
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.autoIndent": "full",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  },
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "editor.suggest.shareSuggestSelections": true,
+  "eslint.lintTask.enable": true,
+  "terminal.integrated.rendererType": "dom",
+  "window.zoomLevel": 0,
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/dist*": true
+  },
+  "files.watcherExclude": {
+    "**/dist*": true
+  },
+  "editor.formatOnSaveMode": "file",
+  "prettier.embeddedLanguageFormatting": "auto",
+  "javascript.format.enable": true,
+  "editor.formatOnSave": true,
+  "prettier.jsxSingleQuote": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

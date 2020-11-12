@@ -31,14 +31,14 @@ export default function SignUp(props) {
       .post("http://localhost:3001/signup/", { email, username, password })
       .then((success) => {
         if (success.data.valid) {
-          props.setMessage(success.data.message);
+          props.setShowSignUp(false);
         }
+        props.setMessage(success.data.message);
       })
       .catch((error) => {
         // handle error
         console.log(error);
       });
-    props.setShowSignUp(false);
   }
 
   return (
@@ -66,6 +66,7 @@ export default function SignUp(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
+          className='signup-button'
           variant='contained'
           color='primary'
           onClick={() => {

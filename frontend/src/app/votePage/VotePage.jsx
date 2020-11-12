@@ -14,7 +14,7 @@ export default function VotePage() {
 
   return (
     <div className='vote-page'>
-      <h2>
+      <h2 className='vote-text'>
         Hi {userLogged}! You liked it {votes} times! {votes > 0 ? ":D" : ":("}
       </h2>
       <h1>Do you like pizza?</h1>
